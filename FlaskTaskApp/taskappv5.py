@@ -82,10 +82,9 @@ def deleteTask(taskDelID):
     """ identifies task in the tasks table by task id and deletes it form the table"""
     
     """ !!! we need to get taskId from frontend?!!!"""
-    
     conn = sqlite3.connect('TaskApp.db') 
     c = conn.cursor()
-    c.execute('DELETE FROM tasks WHERE taskId = ?', (taskDelID) )    
+    c.execute('DELETE FROM tasks WHERE taskId = ?', (taskDelID,) )    
     conn.commit()
     c.close()
     conn.close()

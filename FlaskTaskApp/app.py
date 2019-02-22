@@ -4,7 +4,7 @@ Created on Mon Feb 18 16:18:30 2019
 @author: mluci
 """
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 from flask_cors import CORS
 
 from taskappv5 import *
@@ -76,15 +76,24 @@ def confirmation():
     status = form_data['status']
     note = form_data['description']
     addTask(task, deadline, priority, status, note)
-    return render_template("/confirmation.html", title="Form Confirmation", **locals())
+#    return render_template("/confirmation.html", title="Form Confirmation", **locals())
+    return redirect("tasks", code=302)
 
 @app.route("/confirmation-task-delete", methods=["POST"])
 def confirmationDelete():
     form_data = request.form
     taskDelID = form_data['task-del']
-    deleteTask(taskDelID)
+    deleteTask(taskDelID) 
     return render_template("/confirmation-task-delete.html", title="Form Confirmation", **locals())
+#    return 'DONE'
 
+
+#@app.route("/confirmation-task-delete", methods=["POST"])
+#def confirmationDelete():
+#    form_data = request.form
+#    taskDelID = form_data['task-del']
+#    deleteTask(taskDelID)
+#return render_template("/confirmation-task-delete.html", title="Form Confirmation", **locals())
 
 
 
